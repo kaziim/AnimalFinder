@@ -5,27 +5,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
-
-
+class CorrectAnswer : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_correct_answer)
+    }
 
+    fun nextQuestionButtonOnClick(view: View) {
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-
         val editor = sharedPreferences.edit()
-        editor.putInt("CURRENT_QUESTION",1)
+        editor.putInt("CURRENT_QUESTION",sharedPreferences.getInt("CURRENT_QUESTION",0)+1)
         editor.commit()
 
-        Toast.makeText(this, "current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this,Level1::class.java)
+        startActivity(intent)
+
     }
 
-    fun buttonstart_onclick(view: View) {
-        val intent = Intent(this, Level1::class.java)
-        startActivity(intent)
-    }
 
 }

@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_pink_yellow"
     tools:context=".Level1">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find the Cat"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="277dp"
+            android:layout_height="211dp"
+            android:layout_gravity="center"
+            android:onClick="image1OnClick"
+            android:layout_margin="10dp"
+             />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="276dp"
+            android:layout_height="208dp"
+            android:onClick="image2OnClick"
+            android:layout_gravity="center"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
