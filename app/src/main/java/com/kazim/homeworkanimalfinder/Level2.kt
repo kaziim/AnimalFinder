@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -119,7 +118,7 @@ class Level2 : AppCompatActivity() {
                 editor.commit()
 
                 myDialog.cancel()
-                val intent = Intent(this,Level2::class.java)
+                val intent = Intent(this,Level3::class.java)
                 startActivity(intent)
             }
 
