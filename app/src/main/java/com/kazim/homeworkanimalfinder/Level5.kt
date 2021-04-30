@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
-class Level4 : AppCompatActivity() {
+class Level5 : AppCompatActivity() {
 
     private lateinit var myDialog: Dialog
     private lateinit var btn: Button
@@ -24,24 +24,22 @@ class Level4 : AppCompatActivity() {
     private var levelCounter = 0
 
 
-    class Question6d(id: Int,name1: String,name2: String,val name3: String,val name4: String,val name5: String,val name6: String,
-                     image1: Int,image2: Int,val image3: Int ,val image4: Int,val image5: Int ,val image6: Int) :
+    class Question8d(id: Int,name1: String,name2: String,val name3: String,val name4: String,val name5: String,val name6: String,val name7: String,val name8: String,
+                     image1: Int,image2: Int,val image3: Int ,val image4: Int,val image5: Int ,val image6: Int,val image7: Int ,val image8: Int) :
         Question(id, name1, name2, image1, image2)
 
-    val q1 = Question6d(1, "bear", "duck","dog","mouse","sheep","dolphin",
-        R.drawable.bear, R.drawable.duck,R.drawable.dog,R.drawable.mouse,R.drawable.sheep,R.drawable.dolphin)
-    val q2 = Question6d(1, "monke", "cow","cat","bird","lion","horse",
-        R.drawable.monke, R.drawable.cow,R.drawable.cat,R.drawable.bird,R.drawable.lion,R.drawable.horse)
-    val q3 = Question6d(1, "owl", "pig","horse","rooster","wolf","eagle",
-        R.drawable.owl, R.drawable.pig,R.drawable.horse,R.drawable.rooster,R.drawable.wolf,R.drawable.eagle)
+    val q1 = Question8d(1, "cat", "horse","pig","sheep","eagle","bird","bee","dog",
+        R.drawable.cat, R.drawable.horse,R.drawable.pig,R.drawable.sheep,R.drawable.eagle,R.drawable.bird,R.drawable.bee,R.drawable.dog)
+    val q2 = Question8d(1, "lion", "monke","owl","mouse","cow","duck","chicken","elephant",
+        R.drawable.lion, R.drawable.monke,R.drawable.owl,R.drawable.mouse,R.drawable.cow,R.drawable.duck,R.drawable.chicken,R.drawable.elephant)
+    val q3 = Question8d(1, "bear", "bee","bird","wolf","sheep","dolphin","horse","lion",
+        R.drawable.bear, R.drawable.bee,R.drawable.bird,R.drawable.wolf,R.drawable.sheep,R.drawable.dolphin,R.drawable.horse,R.drawable.lion)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_level4)
-
+        setContentView(R.layout.activity_level5)
 
         FillLevel()
-
     }
 
     fun FillLevel(){
@@ -57,12 +55,14 @@ class Level4 : AppCompatActivity() {
         val Image4 = findViewById<ImageView>(R.id.image4)
         val Image5 = findViewById<ImageView>(R.id.image5)
         val Image6 = findViewById<ImageView>(R.id.image6)
+        val Image7 = findViewById<ImageView>(R.id.image7)
+        val Image8 = findViewById<ImageView>(R.id.image8)
 
 
         val textView = findViewById(R.id.textView2) as TextView
 
-        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 10) { // bear *duck dog mouse sheep dolphin
-            textView.text = "FIND THE DUCK"
+        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 13) { // cat horse pig sheep eagle *bird bee dog
+            textView.text = "FIND THE PARROT"
 
             Image1.setImageResource(q1.image1)
             Image2.setImageResource(q1.image2)
@@ -70,12 +70,14 @@ class Level4 : AppCompatActivity() {
             Image4.setImageResource(q1.image4)
             Image5.setImageResource(q1.image5)
             Image6.setImageResource(q1.image6)
+            Image7.setImageResource(q1.image7)
+            Image8.setImageResource(q1.image8)
 
             levelCounter = 1
 
         }
-        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 11) { // monkey cow cat bird *lion horse
-            textView.text = "FIND THE LION"
+        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 14) { // lion monke *owl mouse cow duck chicken elephant
+            textView.text = "FIND THE OWL"
 
             Image1.setImageResource(q2.image1)
             Image2.setImageResource(q2.image2)
@@ -83,12 +85,14 @@ class Level4 : AppCompatActivity() {
             Image4.setImageResource(q2.image4)
             Image5.setImageResource(q2.image5)
             Image6.setImageResource(q2.image6)
+            Image7.setImageResource(q2.image7)
+            Image8.setImageResource(q2.image8)
 
             levelCounter = 2
 
         }
-        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 12) { // owl pig horse *rooster wolf eagle
-            textView.text = "FIND THE ROOSTER"
+        if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 15) { // *bear bee bird wolf sheep dolphin horse lion
+            textView.text = "FIND THE BEAR"
 
             Image1.setImageResource(q3.image1)
             Image2.setImageResource(q3.image2)
@@ -96,11 +100,13 @@ class Level4 : AppCompatActivity() {
             Image4.setImageResource(q3.image4)
             Image5.setImageResource(q3.image5)
             Image6.setImageResource(q3.image6)
+            Image7.setImageResource(q3.image7)
+            Image8.setImageResource(q3.image8)
 
             levelCounter = 3
 
         }
-        Toast.makeText(this, "level 4 current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "level 5 current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
     }
 
     fun ShowDialog() {
@@ -118,14 +124,14 @@ class Level4 : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         val temp = sharedPreferences.getInt("CURRENT_QUESTION",0)
 
-        if (temp == 12){
-            txt.text = "YOU COMPLETED LEVEL 4 "
+        if (temp == 15){
+            txt.text = "YOU COMPLETED LEVEL 5 "
             btn.text = "NEXT LEVEL"
         }
 
         btn.setOnClickListener {
 
-            if (temp < 12){
+            if (temp < 15){
                 editor.putInt("CURRENT_QUESTION", sharedPreferences.getInt("CURRENT_QUESTION", 0) + 1)
                 editor.commit()
 
@@ -134,12 +140,12 @@ class Level4 : AppCompatActivity() {
                 //this.recreate()
                 restartThis()
             }
-            else if(temp == 12){
+            else if(temp == 15){
                 editor.putInt("CURRENT_QUESTION", sharedPreferences.getInt("CURRENT_QUESTION", 0) + 1)
                 editor.commit()
 
                 myDialog.cancel()
-                val intent = Intent(this,Level5::class.java)
+                val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
             }
 
@@ -166,77 +172,101 @@ class Level4 : AppCompatActivity() {
     fun image1OnClick(view: View) {
 
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ScoreCheck()
+            ShowDialog()
         }
 
     }
 
     fun image2OnClick(view: View) {
         if (levelCounter == 1) {
-            ScoreCheck()
-            ShowDialog()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun image3OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ScoreCheck()
+            ShowDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun image4OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            ScoreCheck()
-            ShowDialog()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun image5OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
-            ScoreCheck()
-            ShowDialog()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun image6OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ScoreCheck()
+            ShowDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun image7OnClick(view: View) {
+        if (levelCounter == 1) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+        if (levelCounter == 2) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+        if (levelCounter == 3) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun image8OnClick(view: View) {
+        if (levelCounter == 1) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+        if (levelCounter == 2) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+        }
+        if (levelCounter == 3) {
+            Toast.makeText(this, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeworkAnimalFinder">
-        <activity android:name=".Level4"></activity>
+        <activity android:name=".Level5"></activity>
+        <activity android:name=".Level4" />
         <activity android:name=".Level3" />
         <activity android:name=".CorrectAnswer" />
         <activity android:name=".Level2" />
@@ -22,5 +23,11 @@
             </intent-filter>
         </activity>
     </application>
+<!--    for TTS service-->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
 
 </manifest>

@@ -39,6 +39,9 @@ class Level1 : AppCompatActivity() {
     fun FillLevel(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
+        //Put score on the score counter
+        val scoreCounter = findViewById<TextView>(R.id.scoreText)
+        scoreCounter.text = "SCORE : ${sharedPreferences.getInt("SCORE_COUNTER",0)}"
 
         val Image1 = findViewById<ImageView>(R.id.image1)
         val Image2 = findViewById<ImageView>(R.id.image2)
@@ -142,32 +145,33 @@ class Level1 : AppCompatActivity() {
     }
 
     fun image1OnClick(view: View) {
-        Log.d("catistan", "onclick tiklandi")
-
 
         if (levelCounter == 1) {
-            Toast.makeText(this@Level1, "You did it.", Toast.LENGTH_SHORT).show()
 
+            ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 2) {
             Toast.makeText(this@Level1, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level1, "You did it.", Toast.LENGTH_SHORT).show()
 
+            ScoreCheck()
             ShowDialog()
         }
 
     }
 
     fun image2OnClick(view: View) {
+
         if (levelCounter == 1) {
             Toast.makeText(this@Level1, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
             Toast.makeText(this@Level1, "You did it.", Toast.LENGTH_SHORT).show()
 
+
+            ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 3) {
@@ -175,20 +179,38 @@ class Level1 : AppCompatActivity() {
         }
     }
 
+
+    fun ScoreCheck(){
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        //Increase current score
+        editor.putInt("SCORE_COUNTER", sharedPreferences.getInt("SCORE_COUNTER", 0) + 1)
+        editor.commit()
+
+        //Check if its personal best score
+        val current = sharedPreferences.getInt("SCORE_COUNTER",0)
+        val best = sharedPreferences.getInt("PERSONAL_BEST",0)
+        if(current > best){
+            editor.putInt("PERSONAL_BEST",current)
+            editor.commit()
+        }
+    }
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         //Hide the status bar for different API levels
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.windowInsetsController!!.hide(
-                    android.view.WindowInsets.Type.statusBars()
+                android.view.WindowInsets.Type.statusBars()
             )
         }else {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
     }
-
-
 
 }
 

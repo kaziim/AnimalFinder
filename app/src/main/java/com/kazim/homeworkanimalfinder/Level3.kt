@@ -43,6 +43,10 @@ class Level3 : AppCompatActivity() {
     fun FillLevel(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
+        //Put score on the score counter
+        val scoreCounter = findViewById<TextView>(R.id.scoreText)
+        scoreCounter.text = "SCORE : ${sharedPreferences.getInt("SCORE_COUNTER",0)}"
+
         val Image1 = findViewById<ImageView>(R.id.image1)
         val Image2 = findViewById<ImageView>(R.id.image2)
         val Image3 = findViewById<ImageView>(R.id.image3)
@@ -154,6 +158,7 @@ class Level3 : AppCompatActivity() {
             Toast.makeText(this@Level3, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 2) {
+            ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 3) {
@@ -176,12 +181,14 @@ class Level3 : AppCompatActivity() {
 
     fun image3OnClick(view: View) {
         if (levelCounter == 1) {
+            ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 2) {
             Toast.makeText(this@Level3, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
         if (levelCounter == 3) {
+            ScoreCheck()
             ShowDialog()
         }
     }
@@ -197,6 +204,26 @@ class Level3 : AppCompatActivity() {
             Toast.makeText(this@Level3, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun ScoreCheck(){
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        //Increase current score
+        editor.putInt("SCORE_COUNTER", sharedPreferences.getInt("SCORE_COUNTER", 0) + 1)
+        editor.commit()
+
+        //Check if its personal best score
+        val current = sharedPreferences.getInt("SCORE_COUNTER",0)
+        val best = sharedPreferences.getInt("PERSONAL_BEST",0)
+        if(current > best){
+            editor.putInt("PERSONAL_BEST",current)
+            editor.commit()
+        }
+    }
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

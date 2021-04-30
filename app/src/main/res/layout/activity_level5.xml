@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_pink_yellow"
     android:orientation="vertical"
-    tools:context=".Level3">
+    tools:context=".Level5">
 
 
     <LinearLayout
@@ -39,21 +39,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="25dp"
         android:gravity="center"
         >
 
         <ImageView
             android:id="@+id/image1"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
             android:onClick="image1OnClick" />
 
         <ImageView
             android:id="@+id/image2"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
             android:onClick="image2OnClick" />
 
@@ -62,24 +61,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="25dp"
         android:gravity="center"
         >
 
         <ImageView
             android:id="@+id/image3"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:onClick="image3OnClick" />
         <ImageView
             android:id="@+id/image4"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:onClick="image4OnClick" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/image5"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="image5OnClick" />
+        <ImageView
+            android:id="@+id/image6"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="image6OnClick" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/image7"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="image7OnClick" />
+        <ImageView
+            android:id="@+id/image8"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="image8OnClick" />
 
     </LinearLayout>
 
