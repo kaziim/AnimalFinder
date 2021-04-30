@@ -4,41 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/gradient_pink_yellow"
+    android:orientation="vertical"
     tools:context=".Level1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find the Cat"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:textSize="40sp" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:padding="40dp"
+        android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/image1"
-            android:layout_width="277dp"
-            android:layout_height="211dp"
-            android:layout_gravity="center"
-            android:onClick="image1OnClick"
-            android:layout_margin="10dp"
-             />
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="276dp"
+        android:layout_height="208dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:onClick="image1OnClick" />
 
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_width="276dp"
-            android:layout_height="208dp"
-            android:onClick="image2OnClick"
-            android:layout_gravity="center"
-            android:layout_margin="10dp" />
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="276dp"
+        android:layout_height="208dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:onClick="image2OnClick" />
 
-    </LinearLayout>
 
 </LinearLayout>
