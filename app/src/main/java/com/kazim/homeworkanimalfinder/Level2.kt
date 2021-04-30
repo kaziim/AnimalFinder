@@ -35,6 +35,12 @@ class Level2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level2)
 
+
+        FillLevel()
+
+    }
+
+    fun FillLevel(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
         val Image1 = findViewById<ImageView>(R.id.image1)
@@ -76,11 +82,7 @@ class Level2 : AppCompatActivity() {
         }
 
         Toast.makeText(this, "level 2 current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
-
-
     }
-
-
 
     fun ShowDialog() {
         myDialog = Dialog(this)

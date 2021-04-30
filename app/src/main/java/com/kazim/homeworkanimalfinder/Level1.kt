@@ -32,6 +32,11 @@ class Level1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level1)
 
+        FillLevel()
+
+    }
+
+    fun FillLevel(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
 
@@ -75,9 +80,6 @@ class Level1 : AppCompatActivity() {
         }
 
         Toast.makeText(this, "current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
-
-
-
     }
 
     fun ShowDialog() {
