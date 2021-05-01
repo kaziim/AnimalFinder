@@ -142,7 +142,7 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
 
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 1) { // cat dog
-            textView.text = "FIND THE CAT"
+            textView.text = "FIND THE \n CAT"
 
             Image1.setImageResource(q1.image1)
             Image2.setImageResource(q1.image2)
@@ -152,7 +152,7 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         }
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 2) { // eagle sheep
-            textView.text = "FIND THE SHEEP"
+            textView.text = "FIND THE \n SHEEP"
 
             Image1.setImageResource(q2.image1)
             Image2.setImageResource(q2.image2)
@@ -162,7 +162,7 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         }
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 3) { // bee wolf
-            textView.text = "FIND THE BEE"
+            textView.text = "FIND THE \n BEE"
 
             Image1.setImageResource(q3.image1)
             Image2.setImageResource(q3.image2)

@@ -10,12 +10,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/mainicon"
+        android:label="Kazim's Animal Finder"
+        android:roundIcon="@mipmap/mainicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeworkAnimalFinder">
-        <activity android:name=".WrongAnswer"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".howToPlay" />
+        <activity android:name=".WrongAnswer" />
         <activity android:name=".Level5" />
         <activity android:name=".Level4" />
         <activity android:name=".Level3" />
@@ -29,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

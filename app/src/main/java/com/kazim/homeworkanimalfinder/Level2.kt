@@ -58,7 +58,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
     override fun onResume() {
         super.onResume()
         //Start countdown timer
-        val timer = object : CountDownTimer(21000, 1000) {
+        val timer = object : CountDownTimer(18000, 1000) {
             val view_timer = findViewById<TextView>(R.id.view_timer)
 
             override fun onTick(millisUntilFinished: Long) {
@@ -137,7 +137,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
         val textView = findViewById(R.id.textView2) as TextView
 
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 4) { // bird bear *lion
-            textView.text = "FIND THE LION"
+            textView.text = "FIND THE \n LION"
 
             Image1.setImageResource(q1.image1)
             Image2.setImageResource(q1.image2)
@@ -147,7 +147,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         }
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 5) { // dog *dolphin duck
-            textView.text = "FIND THE DOLPHIN"
+            textView.text = "FIND THE \n DOLPHIN"
 
             Image1.setImageResource(q2.image1)
             Image2.setImageResource(q2.image2)
@@ -157,7 +157,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         }
         if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 6) { // *chicken monkey mouse
-            textView.text = "FIND THE CHICKEN"
+            textView.text = "FIND THE \n CHICKEN"
 
             Image1.setImageResource(q3.image1)
             Image2.setImageResource(q3.image2)
@@ -177,7 +177,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
         txt = myDialog.findViewById(R.id.messageText) as TextView
 
         popImageIcon = myDialog.findViewById(R.id.popImageIcon) as ImageView
-        popImageIcon.setImageResource(R.drawable.checkmarkgreen)
+        popImageIcon.setImageResource(R.drawable.happy)
 
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -319,7 +319,7 @@ class Level2 : AppCompatActivity(),TextToSpeech.OnInitListener {
         val editor = sharedPreferences.edit()
 
         //Increase current score
-        editor.putInt("SCORE_COUNTER", sharedPreferences.getInt("SCORE_COUNTER", 0) + 1)
+        editor.putInt("SCORE_COUNTER", sharedPreferences.getInt("SCORE_COUNTER", 0) + 2)
         editor.commit()
 
         //Check if its personal best score
