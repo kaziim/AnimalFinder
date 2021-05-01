@@ -3,8 +3,13 @@ package com.kazim.homeworkanimalfinder
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -12,16 +17,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 
-class Level4 : AppCompatActivity() {
+class Level4 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     private lateinit var myDialog: Dialog
     private lateinit var btn: Button
     private lateinit var txt: TextView
+    private lateinit var txtScore: TextView
     private lateinit var menuBtn: Button
     private lateinit var popImageIcon : ImageView
     private var levelCounter = 0
+
+    //Text to speech
+    lateinit var mTTS: TextToSpeech
+    private var mp: MediaPlayer? = null
+    private var timerStopped = false
 
 
     class Question6d(id: Int,name1: String,name2: String,val name3: String,val name4: String,val name5: String,val name6: String,
@@ -41,6 +53,76 @@ class Level4 : AppCompatActivity() {
 
 
         FillLevel()
+
+        mTTS = TextToSpeech(this,this)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Start countdown timer
+        val timer = object : CountDownTimer(21000, 1000) {
+            val view_timer = findViewById<TextView>(R.id.view_timer)
+
+            override fun onTick(millisUntilFinished: Long) {
+                view_timer.setText("${millisUntilFinished / 1000}")
+            }
+
+            override fun onFinish() {
+                view_timer.setText("0")
+                timerStopped = true
+                if(!isFinishing())
+                {
+                    ShowWrongDialog()
+                }
+
+            }
+
+        }.start()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mTTS.stop()
+        mTTS.shutdown()
+        mp?.stop()
+        mp?.reset()
+        mp?.release()
+    }
+
+
+    override fun onInit(status: Int) {
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        if (status == TextToSpeech.SUCCESS) {
+            val result = mTTS.setLanguage(Locale.UK)
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.i("catistan", "The Language specified is not supported!")
+            } else {
+                if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 10){
+                    speakOut("duck",R.raw.duck)
+                }
+                if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 11){
+                    speakOut("lion",R.raw.lion)
+                }
+                if (sharedPreferences.getInt("CURRENT_QUESTION", 0) == 12){
+                    speakOut("rooster",R.raw.rooster)
+                }
+            }
+        } else Log.i("catistan", "Initialization Failed!")
+    }
+
+    fun speakOut(name: String, resource: Int){
+        val toSpeak = "$name ,A $name sounds like "
+        mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+        Handler().postDelayed({
+            if (mp == null){
+
+                mp = MediaPlayer.create(this, resource)
+                mp?.start()
+            }
+        },2000)
 
     }
 
@@ -100,7 +182,6 @@ class Level4 : AppCompatActivity() {
             levelCounter = 3
 
         }
-        Toast.makeText(this, "level 4 current = ${sharedPreferences.getInt("CURRENT_QUESTION",0)}", Toast.LENGTH_SHORT).show()
     }
 
     fun ShowDialog() {
@@ -139,6 +220,7 @@ class Level4 : AppCompatActivity() {
                 editor.commit()
 
                 myDialog.cancel()
+                finish()
                 val intent = Intent(this,Level5::class.java)
                 startActivity(intent)
             }
@@ -148,6 +230,49 @@ class Level4 : AppCompatActivity() {
         menuBtn = myDialog.findViewById(R.id.exitButton) as Button
         menuBtn.setOnClickListener{
             myDialog.cancel()
+            finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        myDialog.show()
+
+    }
+
+    fun ShowWrongDialog() {
+        myDialog = Dialog(this)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.activity_wrong_answer)
+        btn = myDialog.findViewById(R.id.tryButton) as Button
+        txt = myDialog.findViewById(R.id.messageText) as TextView
+        txtScore = myDialog.findViewById(R.id.totalScoreText) as TextView
+
+        popImageIcon = myDialog.findViewById(R.id.popImageIcon) as ImageView
+        popImageIcon.setImageResource(R.drawable.sad)
+
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        txtScore.text = "Your Score : ${sharedPreferences.getInt("SCORE_COUNTER", 0)}"
+
+        btn.setOnClickListener {
+
+
+            editor.putInt("CURRENT_QUESTION", 1)
+            editor.putInt("SCORE_COUNTER", 0)
+            editor.commit()
+
+            myDialog.cancel()
+
+            finish()
+            val intent = Intent(this, Level1::class.java)
+            startActivity(intent)
+        }
+
+        menuBtn = myDialog.findViewById(R.id.exitButton) as Button
+        menuBtn.setOnClickListener{
+            myDialog.cancel()
+            finish()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -166,13 +291,13 @@ class Level4 : AppCompatActivity() {
     fun image1OnClick(view: View) {
 
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
 
     }
@@ -183,31 +308,31 @@ class Level4 : AppCompatActivity() {
             ShowDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
     }
 
     fun image3OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
     }
 
     fun image4OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 3) {
             ScoreCheck()
@@ -217,26 +342,26 @@ class Level4 : AppCompatActivity() {
 
     fun image5OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 2) {
             ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
     }
 
     fun image6OnClick(view: View) {
         if (levelCounter == 1) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 2) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
         if (levelCounter == 3) {
-            Toast.makeText(this@Level4, "Wrong Choice!.", Toast.LENGTH_SHORT).show()
+            ShowWrongDialog()
         }
     }
 

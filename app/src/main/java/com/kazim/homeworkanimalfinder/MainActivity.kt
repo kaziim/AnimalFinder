@@ -2,6 +2,8 @@ package com.kazim.homeworkanimalfinder
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,10 +15,6 @@ import android.widget.Toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    //Text to speech
-    lateinit var mTTS:TextToSpeech
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,18 +41,6 @@ class MainActivity : AppCompatActivity() {
         editor.commit()
 
 
-        //---------------------------------------------------------------------------------------------------------------------------------
-
-        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-            if(status != TextToSpeech.ERROR){
-                //if there is no error
-                mTTS.language = Locale.UK
-            }
-
-        })
-
-
-
     }
 
     fun buttonstart_onclick(view: View) {
@@ -63,6 +49,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+    // Disable status bar
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         //Hide the status bar for different API levels
@@ -74,15 +62,6 @@ class MainActivity : AppCompatActivity() {
         }else {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-    }
-
-    fun buttontts_onclick(view: View) {
-        val toSpeak = "Hey hey I'm here!"
-        mTTS.speak(toSpeak,TextToSpeech.QUEUE_FLUSH,null)
-        Thread.sleep(1_000)
-        mTTS.stop()
-
-
     }
 
 }

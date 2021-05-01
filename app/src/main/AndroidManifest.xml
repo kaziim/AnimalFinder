@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kazim.homeworkanimalfinder">
+    <!-- for TTS service -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -9,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeworkAnimalFinder">
-        <activity android:name=".Level5"></activity>
+        <activity android:name=".WrongAnswer"></activity>
+        <activity android:name=".Level5" />
         <activity android:name=".Level4" />
         <activity android:name=".Level3" />
         <activity android:name=".CorrectAnswer" />
@@ -23,11 +30,5 @@
             </intent-filter>
         </activity>
     </application>
-<!--    for TTS service-->
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.TTS_SERVICE" />
-        </intent>
-    </queries>
 
 </manifest>
