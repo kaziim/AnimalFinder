@@ -126,6 +126,18 @@ class Level4 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     }
 
+    fun speakOutNoMP(flag: Boolean){
+        var toSpeak : String
+        if (flag){
+            toSpeak = "You got it! "
+        }else{
+            toSpeak = "Wrong Answer, Try again."
+        }
+
+        mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+
+    }
+
     fun FillLevel(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
@@ -304,37 +316,46 @@ class Level4 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     fun image2OnClick(view: View) {
         if (levelCounter == 1) {
+            speakOutNoMP(true)
             ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 2) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 3) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
     }
 
     fun image3OnClick(view: View) {
         if (levelCounter == 1) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 2) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 3) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
     }
 
     fun image4OnClick(view: View) {
         if (levelCounter == 1) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 2) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 3) {
+            speakOutNoMP(true)
             ScoreCheck()
             ShowDialog()
         }
@@ -342,25 +363,31 @@ class Level4 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     fun image5OnClick(view: View) {
         if (levelCounter == 1) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 2) {
+            speakOutNoMP(true)
             ScoreCheck()
             ShowDialog()
         }
         if (levelCounter == 3) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
     }
 
     fun image6OnClick(view: View) {
         if (levelCounter == 1) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 2) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
         if (levelCounter == 3) {
+            speakOutNoMP(false)
             ShowWrongDialog()
         }
     }
