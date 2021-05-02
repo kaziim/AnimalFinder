@@ -36,6 +36,8 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
     private var mp: MediaPlayer? = null
     private var timerStopped = false
 
+    private var isInFront = false
+
 
     class Question8d(id: Int,name1: String,name2: String,val name3: String,val name4: String,val name5: String,val name6: String,val name7: String,val name8: String,
                      image1: Int,image2: Int,val image3: Int ,val image4: Int,val image5: Int ,val image6: Int,val image7: Int ,val image8: Int) :
@@ -60,6 +62,8 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     override fun onResume() {
         super.onResume()
+
+        isInFront = true
         //Start countdown timer
         val timer = object : CountDownTimer(9000, 1000) {
             val view_timer = findViewById<TextView>(R.id.view_timer)
@@ -73,7 +77,6 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
                 timerStopped = true
                 if(!isFinishing())
                 {
-                    mTTS.speak("No time left, try again.", TextToSpeech.QUEUE_FLUSH, null, "")
                     ShowWrongDialog()
                 }
 
@@ -81,6 +84,11 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         }.start()
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isInFront = false
     }
 
     override fun onDestroy() {
@@ -260,6 +268,11 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         popImageIcon = myDialog.findViewById(R.id.popImageIcon) as ImageView
         popImageIcon.setImageResource(R.drawable.sad)
+
+        if (timerStopped && isInFront){
+            mTTS.speak("No time left, try again.", TextToSpeech.QUEUE_FLUSH, null, "")
+            txt.text = "NO TIME LEFT "
+        }
 
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

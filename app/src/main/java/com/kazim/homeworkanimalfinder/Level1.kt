@@ -43,6 +43,7 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
     private var timerStopped = false
     private var clickedCorrect = false
 
+    private var isInFront : Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +61,8 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     override fun onResume() {
         super.onResume()
+
+        isInFront = true
         //Start countdown timer
         val timer = object : CountDownTimer(21000, 1000) {
             val view_timer = findViewById<TextView>(R.id.view_timer)
@@ -73,12 +76,16 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
                 timerStopped = true
                 if(!isFinishing)
                 {
-                    mTTS.speak("No time left, try again.", TextToSpeech.QUEUE_FLUSH, null, "")
                     ShowWrongDialog()
                 }
             }
 
         }.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isInFront = false
     }
 
     override fun onDestroy() {
@@ -255,7 +262,8 @@ class Level1 : AppCompatActivity(),TextToSpeech.OnInitListener {
         popImageIcon = myDialog.findViewById(R.id.popImageIcon) as ImageView
         popImageIcon.setImageResource(R.drawable.sad)
 
-        if (timerStopped){
+        if (timerStopped && isInFront){
+            mTTS.speak("No time left, try again.", TextToSpeech.QUEUE_FLUSH, null, "")
             txt.text = "NO TIME LEFT "
         }
 
