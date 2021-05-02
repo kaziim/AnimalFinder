@@ -1,6 +1,6 @@
 # Animal Finder
 
-Animal Finder is an android app that aims to teach kids about animals. This app was written for CENG427 Programming of Mobile Devices
+Animal Finder is an android app that aims to teach kids about animals. This app was written for CENG427 Programming of Mobile Devices, it required Android API 30 to run.
 
 
 ## Usage
