@@ -73,6 +73,7 @@ class Level5 : AppCompatActivity(),TextToSpeech.OnInitListener {
                 timerStopped = true
                 if(!isFinishing())
                 {
+                    mTTS.speak("No time left, try again.", TextToSpeech.QUEUE_FLUSH, null, "")
                     ShowWrongDialog()
                 }
 

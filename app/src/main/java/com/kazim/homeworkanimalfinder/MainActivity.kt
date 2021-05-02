@@ -33,17 +33,21 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
 
         //---------------------------------------------------------------------------------------------------------------------------------
+
+        //CHECK IF THE USER HAS PLAYED THE GAME EVER BEFORE
+        if(!sharedPreferences.contains("PERSONAL_BEST")){
+            editor.putInt("PERSONAL_BEST",0)
+        }
         //PERSONAL BEST SCORE DISPLAY
         val scoreText = findViewById<TextView>(R.id.scoreText)
-        if (sharedPreferences.contains("PERSONAL_BEST")){
-            scoreText.text = "PERSONAL BEST SCORE : ${sharedPreferences.getInt("PERSONAL_BEST",0)}"
-        }
+        scoreText.text = "PERSONAL BEST SCORE : ${sharedPreferences.getInt("PERSONAL_BEST",0)}"
 
 
-        if(sharedPreferences.contains("CURRENT_QUESTION")){
-            editor.putInt("CURRENT_QUESTION",1)
-            editor.commit()
-        }
+
+
+        editor.putInt("CURRENT_QUESTION",1)
+        editor.commit()
+
 
         //Initialize current score counter
         editor.putInt("SCORE_COUNTER",0)
